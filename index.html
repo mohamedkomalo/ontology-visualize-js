@@ -14,11 +14,11 @@
 			<input id="ShowIndividuals" name="type" type="radio">Individuals</input><br>
 			<input id="ShowSchema" name="type" type="radio" checked>Schema</input>
 		</div>
-
 		<input id="urlInput" style="width:600px"
 			value="http://ontology-mohamedkomalo.rhcloud.com/ontologyFile"
 			required />
-		<button onclick="onLoadButtonClick()">Load</button>
+		<button onclick="onLoadButtonClick()">Load</button> <br><br>
+		Please wait after clicking Load as it takes some time to retrive the file
 	</div>
 
 	<div id="ontology"></div>
@@ -27,6 +27,9 @@
 		function onLoadButtonClick() {
 			var ontologyElem = document.getElementById('ontology');
 			var url = $("#urlInput").val();
+
+			ontologyVisualizer.showIndividuals = $('#ShowIndividuals').prop('checked');
+			ontologyVisualizer.showSchema = $('#ShowSchema').prop('checked');
 
 			$.ajax({
 				url : 'http://jsonp.nodejitsu.com/?url=' + url,
@@ -38,10 +41,8 @@
 				}
 			});
 			
-			ontologyVisualizer.showIndividuals = $('#ShowIndividuals').prop('checked');
-			ontologyVisualizer.showSchema = $('#ShowSchema').prop('checked');
-			console.log(ontologyVisualizer);
-			ontologyVisualizer.visualize(ontologyElem, komalo);
+			//console.log(ontologyVisualizer);
+			//ontologyVisualizer.visualize(ontologyElem, komalo);
 		};
 
 		onLoadButtonClick();
